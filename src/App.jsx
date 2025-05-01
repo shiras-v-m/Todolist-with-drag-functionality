@@ -4,12 +4,16 @@ import viteLogo from '/vite.svg'
 import './App.css'
 import TodoInput from './components/TodoInput'
 import TodoList from './components/TodoList'
+import Counts from './components/Counts'
 
 function App() {
   const [userInput, setUserInput] = useState('')
   const [todos, setTodos] = useState([])
   const [editMode, setEditMode] = useState(false)
   const [editId, setEditId] = useState(null)
+
+  const [completedTodos, setCompletedTodos] = useState(0)
+  const [totalTodos, setTotalTodos] = useState(0)
 
   const handleEditMode = (id) => {
     setEditMode(true)
@@ -20,6 +24,8 @@ function App() {
     console.log("edit mode activated", id);
 
   }
+
+
   const updateItem = (id) => {
     if (userInput.trim() === '') {
       alert('Cannot update to an empty todo');
@@ -78,20 +84,33 @@ function App() {
 
   // To track the current state of the todo list
   useEffect(() => {
+    let completedCount=0
+    let totalTodosCount=0
+
+    //we are not returning anything from todos so instead of map we can use forEach
+     todos.forEach((todo) => {
+      if (todo.completed) {
+        completedCount=completedCount+1
+      }
+    totalTodosCount=totalTodosCount+1
+    })
+    setTotalTodos(totalTodosCount)
+    setCompletedTodos(completedCount) 
+
+
     console.log('todos', todos);
     todos.forEach((todo) => {
-      console.log(new Date(todo.id).toString());
+      console.log(todo.id);
     });
-
-
   }, [todos])
-  return (
-    <>
-      <h2>TodoList</h2>
-      <TodoInput userInput={userInput} setUserInput={setUserInput} addTodo={addTodo} updateItem={updateItem} setEditMode={setEditMode} editMode={editMode} editId={editId} />
 
+  return (
+    <div className='container'>
+      <h2>TodoList</h2>
+      <Counts completedTodos={completedTodos} totalTodos={totalTodos}/>
+      <TodoInput userInput={userInput} setUserInput={setUserInput} addTodo={addTodo} updateItem={updateItem} setEditMode={setEditMode} editMode={editMode} editId={editId} />
       <TodoList todos={todos} updateComplete={updateComplete} deleteItem={deleteItem} handleEditMode={handleEditMode} editMode={editMode}  reorderTodos={reorderTodos}/>
-    </> 
+    </div> 
   )
 }
 

@@ -1,0 +1,53 @@
+:root {
+    font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
+    line-height: 1.5;
+    font-weight: 400;
+  }
+  
+  *{
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+  }
+
+  body{
+    display: flex;
+    justify-content: center;
+  }
+ 
+  input{
+    font-size: medium ; 
+    padding: 0.8rem 1rem ;
+    border-radius: 6px;
+    border: 0.5px solid #ccc;
+    transition: all 0.3s ease;
+    margin-bottom: 1rem;
+  }
+  button{
+    padding: 0.8rem 1rem ;
+    border-radius: 6px;
+    border: 0.5px solid #ccc;
+    background-color: #0070f3;
+    color: white;
+    cursor: pointer;
+    transition: all 0.3s ease;
+  }
+  input:focus{
+    outline: none;
+    border: 1px solid #0070f3;
+  }
+  
+  h2{
+    text-align: center;
+    border: 1px solid #ccc;
+    margin-bottom: 0.8rem;
+  }
+  
+  .counts{
+    margin-bottom: 1rem;
+  }
+  .counts p{
+    text-align: right;
+    margin-left: 0.8rem;
+    font-size: 0.8rem;
+  }
